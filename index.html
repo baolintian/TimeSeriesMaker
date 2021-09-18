@@ -45,7 +45,7 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	<ul class="nav navbar-nav navbar-right">
-          <li><a href="https://github.com/mbonvini/TimeSeriesMaker"><i class="fa fa-github"></i> Github</a></li>
+          <li><a href="https://github.com/baolintian/TimeSeriesMaker"><i class="fa fa-github"></i> Github</a></li>
 	</ul>
       </div>
     </div>
@@ -68,7 +68,24 @@
 	  </p>
 	</div>
       </div>
-      
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          开始时间： <input type="text" name="init" id="start_time" style="width:200px" value="2016.04.20"><br>
+          结束时间： <input type="text" name="init" id="end_time" style="width:200px" value="2016.08.30"><br>
+          y轴下限： <input type="text" name="init" id="y_low" style="width:200px" value="0"><br>
+          y轴上限： <input type="text" name="init" id="y_up" style="width:200px" value="1000"><br>
+          y轴类型： <select id = "y_type">
+            <option value="linear">linear</option>
+            <option value="log">log</option>
+            <option value="pow">pow</option>
+        </select>
+        </div>
+      </div>
+      <div class = "col-md-4 col-md-offset-1">
+        <a class="btn btn-info disabled" href="#" role="button" id="setAxis">
+          <i class="fa fa-file-o"></i> 设置坐标
+        </a>
+      </div>	
       <!-- CANVAS -->
       <div class="row">
 	<div class = "col-md-10 col-md-offset-1" id="canvas">

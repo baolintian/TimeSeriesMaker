@@ -3,29 +3,36 @@ var divWidth = $('#canvas').width();
 var divHeight = divWidth/2.5;
 
 // Define the margin and sizes of the plotting area
-var margin = {top: 20, right: 40, bottom: 50, left: 30},
+var margin = {top: 20, right: 40, bottom: 50, left: 50},
     width = divWidth - margin.left - margin.right,
     height = divHeight - margin.top - margin.bottom;
 
 // Scales for X and Y axes
-var x = d3.scale.linear().domain([0, 24]).range([0, width]);
-var y = d3.scale.linear().domain([0, 100]).range([height, 0]);
+var x = d3.scale.linear().domain([new Date("2016.04.20"), new Date("2016.06.30")]).range([0, width]);
+var y = d3.scale.pow().exponent(2).domain([10, 1000]).range([height, 0]);
 
 // X and Y axes
 var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom")
+	.ticks(4)
     .innerTickSize(-height)
     .outerTickSize(6)
-    .tickPadding(10);
+    .tickPadding(10)
+	.tickFormat(function(d) { return String(new Date(d).getFullYear())+"."+
+									String(new Date(d).getMonth())+"."+
+									String(new Date(d).getHours()) });
+
+var commasFormatter = d3.format(",.0f");
 
 var yAxisLeft = d3.svg.axis()
     .scale(y)
     .orient("left")
     .ticks(10)
     .innerTickSize(-width)
-    .outerTickSize(6)
-    .tickPadding(10);
+    .outerTickSize(10)
+    .tickPadding(10)
+	.tickFormat(function(d) { return "$" + commasFormatter(d); });
 
 // The SVG element containing the plot
 var svg = d3.select("#canvas")
@@ -78,11 +85,11 @@ svg.on("mousedown", function(){
 	if(x > 0){
 
 	    if(drawObj.dataPoints.length > 0){
-		drawObj.dataPoints = [];
-		drawObj.currentPath = null;
-		d3.selectAll(".currentPath").remove();
-		$('#exportCsv').addClass('disabled');
-		$('#exportJSON').addClass('disabled');
+			drawObj.dataPoints = [];
+			drawObj.currentPath = null;
+			d3.selectAll(".currentPath").remove();
+			$('#exportCsv').addClass('disabled');
+			$('#exportJSON').addClass('disabled');
 	    }
 	    drawObj.isDown = true;
 	}
