@@ -10,15 +10,15 @@ function create_canvas(start_time, end_time, y_low, y_up, y_type){
 		height = divHeight - margin.top - margin.bottom;
 
 	// Scales for X and Y axes
-	var x = d3.scale.linear().domain([new Date(start_time), new Date(end_time)]).range([0, width]);
+	x = d3.scale.linear().domain([new Date(start_time), new Date(end_time)]).range([0, width]);
 	if(y_type == "linear"){
-		var y = d3.scale.linear().domain([y_low, y_up]).range([height, 0]);
+		y = d3.scale.linear().domain([y_low, y_up]).range([height, 0]);
 	}
 	else if (y_type == "log"){
-		var y = d3.scale.log().domain([y_low, y_up]).range([height, 0]);
+		y = d3.scale.log().domain([y_low, y_up]).range([height, 0]);
 	}
 	else if(y_type == "pow"){
-		var y = d3.scale.pow().exponent(2).domain([y_low, y_up]).range([height, 0]);
+		y = d3.scale.pow().exponent(2).domain([y_low, y_up]).range([height, 0]);
 	}
 	
 	$('#setAxis').removeClass('disabled');
@@ -76,7 +76,7 @@ function create_canvas(start_time, end_time, y_low, y_up, y_type){
 
 	// Define the Object that will contain the data to draw
 	// the line
-	var drawObj = {
+	drawObj = {
 		isDown: false,
 		dataPoints: [],
 		currentPath: null
